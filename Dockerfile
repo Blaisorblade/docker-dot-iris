@@ -4,7 +4,7 @@
 
 FROM coqorg/coq:8.10
 
-ENV NJOBS="2"
+ENV NJOBS="4"
 ENV CONTRIB_NAME="dot-iris"
 ENV SUBMODULE_PATH="dot-iris"
 ENV OPAM_NAME="dot-iris-builddep"
