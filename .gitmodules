@@ -1,0 +1,3 @@
+[submodule "dot-iris"]
+	path = dot-iris
+	url = git@github.com:Blaisorblade/dot-iris.git
