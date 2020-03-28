@@ -1,5 +1,5 @@
-#!/bin/sh
-VERSION=2020-01-21.1.676a5302
+#!/bin/bash
+VERSION=iris-$(grep coq-iris dot-iris/opam | sed -n 's/.*"dev\.\(.*\)".*/\1/p')
 
 TAG=blaisorblade/docker-dot-iris:$VERSION
 
