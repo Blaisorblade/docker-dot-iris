@@ -2,7 +2,7 @@
 # Install the dependencies from SUBMODULE_PATH/opam
 #
 
-FROM coqorg/coq:8.10
+FROM blaisorblade/coq:8.11-dev
 
 ENV NJOBS="4"
 ENV CONTRIB_NAME="dot-iris"
