@@ -2,7 +2,8 @@
 # Install the dependencies from SUBMODULE_PATH/opam
 #
 
-FROM coqorg/coq:8.10
+ARG COQ_IMAGE
+FROM ${COQ_IMAGE}
 
 ENV NJOBS="4"
 ENV CONTRIB_NAME="dot-iris"
