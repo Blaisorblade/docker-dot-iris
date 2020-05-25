@@ -16,7 +16,7 @@ COPY $SUBMODULE_PATH/opam /home/coq/$OPAM_NAME/
 
 RUN ["/bin/bash", "--login", "-c", "set -x \
   && opam switch ${COMPILER_EDGE} \
-  && opam repo add iris-dev https://gitlab.mpi-sws.org/FP/opam-dev.git --set-default --all "]
+  && opam repo add iris-dev https://gitlab.mpi-sws.org/iris/opam.git --set-default --all "]
 
 RUN ["/bin/bash", "--login", "-c", "set -x \
   && eval $(opam env) \
