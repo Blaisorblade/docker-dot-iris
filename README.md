@@ -22,3 +22,19 @@ This script is currently specialized to my needs.
   - tag it, with a name mentioning the versions used for the Coq and Iris dependencies
   - push it to Docker Hub using `docker push`
 7. if in step 4 you bumped dependencies and created a PR, modify `.travis.yml` in that PR to use the newly built Docker image.
+
+## Installing Docker on Mac
+
+I use
+
+```
+brew cask info docker
+```
+
+and then start and navigate the app.
+
+Docker will create and use a Linux virtual machine which will perform the actual work.
+
+On my computer, by default, this VM is assigned 4 processors, 2GB of RAM and no swap. That's not enough RAM.
+The `Dockerfile` builds with `make -j4`, which easily runs OOM. It seems 4GB
+work; that's probably 1GB per Coq process, hence per core.
