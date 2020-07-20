@@ -1,7 +1,9 @@
 #!/bin/bash -ex
 COQ_VERSION=8.11.2
 COQ_IMAGE=coqorg/coq:${COQ_VERSION}
-VERSION=coq-${COQ_VERSION}-iris-$(grep coq-iris dot-iris/opam | sed -n 's/.*"dev\.\(.*\)".*/\1/p')
+version_line=$(grep '"coq-iris"' dot-iris/opam)
+iris_version=$(echo $version_line | sed -E -n 's/.*"(dev\.)?(.*)".*/\2/p')
+VERSION=coq-${COQ_VERSION}-iris-${iris_version}
 
 TAG=blaisorblade/docker-dot-iris:$VERSION
 
