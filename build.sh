@@ -1,8 +1,9 @@
 #!/bin/bash -ex
 REPO=Blaisorblade/dot-iris
-COMMIT=master
+#COMMIT=port-coq-812
+COMMIT=52c6daef0a8573b7e19371a5dadd2a36276d6aed
 
-COQ_VERSION=8.11.2
+COQ_VERSION=8.12.1
 COQ_IMAGE=coqorg/coq:${COQ_VERSION}
 OPAM_FILE=dot-iris-opam
 
