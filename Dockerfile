@@ -2,7 +2,8 @@
 # Install the dependencies from SUBMODULE_PATH/opam
 #
 
-FROM coqorg/coq:8.15-ocaml-4.12-flambda
+ARG COQ_VERSION
+FROM coqorg/coq:${COQ_VERSION}-ocaml-4.12-flambda
 
 ENV NJOBS="4"
 
@@ -11,10 +12,11 @@ RUN set -x \
 
 COPY opam-clean.sh /tmp/
 
+ARG IRIS_VERSION
 RUN set -x \
   && eval `opam env` \
   && opam update -y \
-  && opam pin add -y -n -k version coq-iris 3.6.0 \
+  && opam pin add -y -n -k version coq-iris ${IRIS_VERSION} \
   && opam pin add -y -n -k version coq-autosubst 1.7 \
   && opam install -y -v -j ${NJOBS} coq-iris coq-autosubst \
   && /tmp/opam-clean.sh \

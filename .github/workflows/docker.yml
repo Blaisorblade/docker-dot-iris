@@ -1,5 +1,9 @@
 name: ci
 
+env:
+  COQ_VERSION: 8.15
+  IRIS_VERSION: 3.6.0
+
 on:
   push:
     branches:
@@ -27,4 +31,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: blaisorblade/docker-dot-iris:latest
+          build-args: |
+            COQ_VERSION=${{ env.COQ_VERSION }}
+            IRIS_VERSION=${{ env.IRIS_VERSION }}
+          tags: blaisorblade/docker-dot-iris:coq-${{ env.COQ_VERSION }}-iris-${{ env.IRIS_VERSION }}
