@@ -8,6 +8,9 @@ on:
   push:
     branches:
       - 'master'
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
   docker:
@@ -30,7 +33,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           build-args: |
             COQ_VERSION=${{ env.COQ_VERSION }}
             IRIS_VERSION=${{ env.IRIS_VERSION }}
