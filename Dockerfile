@@ -3,7 +3,7 @@
 #
 
 ARG COQ_VERSION
-FROM coqorg/coq:${COQ_VERSION}-ocaml-4.14-flambda
+FROM coqorg/coq:${COQ_VERSION}-ocaml-4.14.0-flambda
 
 ENV NJOBS="4"
 
