@@ -2,7 +2,7 @@ name: ci
 
 env:
   COQ_VERSION: 8.15
-  IRIS_VERSION: 3.6.0
+  IRIS_VERSION: 4.0.0
 
 on:
   push:
