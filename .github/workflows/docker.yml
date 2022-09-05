@@ -1,7 +1,7 @@
 name: ci
 
 env:
-  COQ_VERSION: 8.15
+  COQ_VERSION: 8.16
   IRIS_VERSION: 4.0.0
 
 on:
