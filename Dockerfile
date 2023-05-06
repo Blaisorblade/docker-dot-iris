@@ -17,7 +17,7 @@ RUN set -x \
   && eval `opam env` \
   && opam update -y \
   && opam pin add -y -n -k version coq-iris ${IRIS_VERSION} \
-  && opam pin add -y -n -k version coq-autosubst 1.7 \
+  && opam pin add -y -n -k version coq-autosubst dev \
   && opam install -y -v -j ${NJOBS} coq-iris coq-autosubst \
   && /tmp/opam-clean.sh \
   && opam config list && opam list
