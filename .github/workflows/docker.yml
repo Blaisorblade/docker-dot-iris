@@ -18,9 +18,6 @@ jobs:
         include:
           - iris: 4.0.0
             coq: 8.16
-    env:
-      COQ_VERSION: ${{ matrix.coq }}
-      IRIS_VERSION: ${{ matrix.iris }}
     steps:
       -
         name: Set up QEMU
@@ -41,6 +38,6 @@ jobs:
         with:
           push: ${{ github.event_name != 'pull_request' }}
           build-args: |
-            COQ_VERSION=${{ env.COQ_VERSION }}
-            IRIS_VERSION=${{ env.IRIS_VERSION }}
-          tags: blaisorblade/docker-dot-iris:coq-${{ env.COQ_VERSION }}-iris-${{ env.IRIS_VERSION }}
+            COQ_VERSION=${{ matrix.coq }}
+            IRIS_VERSION=${{ matrix.iris }}
+          tags: blaisorblade/docker-dot-iris:coq-${{ matrix.coq }}-iris-${{ matrix.iris }}
