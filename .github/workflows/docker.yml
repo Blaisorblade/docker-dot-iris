@@ -1,9 +1,5 @@
 name: ci
 
-env:
-  COQ_VERSION: 8.15
-  IRIS_VERSION: 3.6.0
-
 on:
   push:
     branches:
@@ -15,26 +11,34 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # Don't abort other jobs when one fails!
+      matrix:
+        iris: [3.6.0, 4.0.0]
+        coq: [8.15]
+        include:
+          - iris: 4.0.0
+            coq: 8.16
     steps:
       -
         name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
       -
         name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           push: ${{ github.event_name != 'pull_request' }}
           build-args: |
-            COQ_VERSION=${{ env.COQ_VERSION }}
-            IRIS_VERSION=${{ env.IRIS_VERSION }}
-          tags: blaisorblade/docker-dot-iris:coq-${{ env.COQ_VERSION }}-iris-${{ env.IRIS_VERSION }}
+            COQ_VERSION=${{ matrix.coq }}
+            IRIS_VERSION=${{ matrix.iris }}
+          tags: blaisorblade/docker-dot-iris:coq-${{ matrix.coq }}-iris-${{ matrix.iris }}
