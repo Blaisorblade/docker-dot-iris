@@ -1,9 +1,5 @@
 name: ci
 
-env:
-  COQ_VERSION: 8.15
-  IRIS_VERSION: 3.6.0
-
 on:
   push:
     branches:
@@ -15,6 +11,16 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        iris: [3.6.0, 4.0.0]
+        coq: [8.15]
+        include:
+          - iris: 4.0.0
+            coq: 8.16
+    env:
+      COQ_VERSION: ${{ matrix.coq }}
+      IRIS_VERSION: ${{ matrix.iris }}
     steps:
       -
         name: Set up QEMU
