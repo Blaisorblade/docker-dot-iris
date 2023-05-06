@@ -12,6 +12,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false # Don't abort other jobs when one fails!
       matrix:
         iris: [3.6.0, 4.0.0]
         coq: [8.15]
