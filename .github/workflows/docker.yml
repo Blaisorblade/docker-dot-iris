@@ -19,6 +19,8 @@ jobs:
         include:
           - iris: 4.0.0
             coq: 8.16
+          - iris: 4.0.0
+            coq: 8.17
     steps:
       -
         name: Set up QEMU
