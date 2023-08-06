@@ -9,6 +9,7 @@ This script is currently specialized to my needs. Docs below are partially out-o
 
 1. setup Docker
  - install Docker
+ - on Mac or Windows, increase the amount of RAM assigned to the VM to avoid OOM — >= 1 GB per core should work.
  - login to Docker Hub, and login on it, so that `docker push` works (our scripts assume `docker` can be invoked without `sudo`, as on Mac, or with sudoless Docker on Linux)
 2. clone this repo;
 3. update the matrix of Coq/Iris versions to support in .github/workflows/docker.yml.
@@ -18,15 +19,6 @@ This script is currently specialized to my needs. Docs below are partially out-o
 ## Installing Docker on Mac
 
 I use
-
 ```
 brew cask info docker
 ```
-
-and then start and navigate the app.
-
-Docker will create and use a Linux virtual machine which will perform the actual work.
-
-On my computer, by default, this VM is assigned 4 processors, 2GB of RAM and no swap. That's not enough RAM.
-The `Dockerfile` builds with `make -j4`, which easily runs OOM. It seems 4GB
-work; that's probably 1GB per Coq process, hence per core.
