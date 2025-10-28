@@ -14,17 +14,18 @@ jobs:
     strategy:
       fail-fast: false # Don't abort other jobs when one fails!
       matrix:
-        iris: [3.6.0, 4.0.0]
-        coq: [8.15]
+        # iris: 4.0.0
+        # iris: [3.6.0, 4.0.0]
+        # coq: [8.15]
         include:
-          - iris: 4.0.0
-            coq: 8.16
+          # - iris: 4.0.0
+          #   coq: 8.16
           - iris: 4.0.0
             coq: 8.17
     steps:
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+      # -
+      #   name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v2
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -34,13 +35,25 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # -
+      #   name: Build and push
+      #   id: docker_build
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     push: ${{ github.event_name != 'pull_request' }}
+      #     build-args: |
+      #       COQ_VERSION=${{ matrix.coq }}
+      #       IRIS_VERSION=${{ matrix.iris }}
+      #     tags: blaisorblade/docker-dot-iris:coq-${{ matrix.coq }}-iris-${{ matrix.iris }}
+
       -
-        name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v4
-        with:
-          push: ${{ github.event_name != 'pull_request' }}
-          build-args: |
-            COQ_VERSION=${{ matrix.coq }}
-            IRIS_VERSION=${{ matrix.iris }}
-          tags: blaisorblade/docker-dot-iris:coq-${{ matrix.coq }}-iris-${{ matrix.iris }}
+        name: Test build
+        id: docker_build_manual
+        shell: bash
+        run: |
+          docker images
+          docker build -t blaisorblade/docker-dot-iris:test-coq-${{ matrix.coq }}-iris-${{ matrix.iris }} \
+            --build-arg COQ_VERSION=${{ matrix.coq }} \
+            --build-arg IRIS_VERSION=${{ matrix.iris }} \
+            .
