@@ -35,16 +35,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v4
-        with:
-          push: ${{ github.event_name != 'pull_request' }}
-          build-args: |
-            COQ_VERSION=${{ matrix.coq }}
-            IRIS_VERSION=${{ matrix.iris }}
-          tags: blaisorblade/docker-dot-iris:coq-${{ matrix.coq }}-iris-${{ matrix.iris }}
+
+      # -
+      #   name: Build and push
+      #   id: docker_build
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     push: ${{ github.event_name != 'pull_request' }}
+      #     build-args: |
+      #       COQ_VERSION=${{ matrix.coq }}
+      #       IRIS_VERSION=${{ matrix.iris }}
+      #     tags: blaisorblade/docker-dot-iris:coq-${{ matrix.coq }}-iris-${{ matrix.iris }}
 
       -
         name: Test build
