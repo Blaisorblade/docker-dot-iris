@@ -45,3 +45,14 @@ jobs:
             COQ_VERSION=${{ matrix.coq }}
             IRIS_VERSION=${{ matrix.iris }}
           tags: blaisorblade/docker-dot-iris:coq-${{ matrix.coq }}-iris-${{ matrix.iris }}
+
+      -
+        name: Test build
+        id: docker_build_manual
+        shell: bash
+        run: |
+          docker images
+          docker build -t blaisorblade/docker-dot-iris:test-coq-${{ matrix.coq }}-iris-${{ matrix.iris }} \
+            --build-arg COQ_VERSION=${{ matrix.coq }} \
+            --build-arg IRIS_VERSION=${{ matrix.iris }} \
+            .
