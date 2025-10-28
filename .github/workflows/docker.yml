@@ -23,9 +23,9 @@ jobs:
           - iris: 4.0.0
             coq: 8.17
     steps:
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+      # -
+      #   name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v2
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
